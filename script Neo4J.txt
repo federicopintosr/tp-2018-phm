@@ -1,0 +1,30 @@
+Parte 2: Consultas
+Cada integrante deberá resolver las siguientes consultas utilizando Cypher o cualquier lenguaje nativo en la base de grafos elegida.
+Integrante 1: Saber qué órdenes de compra pidieron 2 tornopletes.
+
+MATCH (oc:OrdenCompra )
+      -[compuesta:COMPUESTA_POR]->
+      (l:ItemOrdenCompra{cantidad: 2}) 
+      -[tiene:CANTIDAD_DE]->
+      (p:Producto {descripcion: 'Tornoplete'})
+RETURN oc ,compuesta, l, p;
+
+
+Integrante 2: Saber qué productos están por debajo del stock mínimo.
+
+MATCH (p:Producto)
+      where p.stockAct < p.stockMin
+RETURN u ;
+
+
+Integrante 3: Saber cuáles fueron órdenes de compra de una semana determinada.
+
+MATCH (oc:OrdenCompra)
+         where '2012-02-09'< oc.fecha < '2012-02-16'
+RETURN oc;
+
+Integrante 4: Saber qué productos comienzan con la letra P.
+
+MATCH (p: Producto) WHERE p.descripcion =~ 'P.*' RETURN p;
+
+En caso de haber menos integrantes quedarán sin implementar dichos puntos. Ej: si son dos integrantes solamente se resolverán los dos primeros requerimientos.
